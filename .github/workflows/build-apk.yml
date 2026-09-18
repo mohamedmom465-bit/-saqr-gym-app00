@@ -3,11 +3,12 @@ name: Build SAQR GYM APK
 on:
   workflow_dispatch:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,14 +21,6 @@ jobs:
 
       - name: Generate Android platform project
         run: flutter create --platforms=android .
-
-      - name: Configure Android integration
-        shell: pwsh
-        run: ./tool/configure_android.ps1
-
-      - name: Verify Android integration
-        shell: pwsh
-        run: ./tool/verify_android_setup.ps1
 
       - name: Get packages
         run: flutter pub get
